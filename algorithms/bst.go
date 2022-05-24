@@ -26,6 +26,20 @@ func (tree *BST) insert(k int,root *Node) *Node{
 	return root
 }
 
+func (tree *BST) search(k int,root *Node) bool {
+	if root==nil{
+		return false
+	}
+
+	if root.key == k{
+		return true
+	} else if(root.key < k){
+		return tree.search(k,root.right)
+	} else{
+		return tree.search(k,root.left)
+	}
+}
+
 func (tree *BST) print(root *Node){
 	if root==nil{
 		return
@@ -43,4 +57,9 @@ func main(){
 	bst.root = bst.insert(1,bst.root)
 	bst.root = bst.insert(25,bst.root)
 	bst.print(bst.root)
+
+	k1 := 10
+	k2 := 100
+	fmt.Printf("\nSearching %d - %v\n",k1,bst.search(k1,bst.root))
+	fmt.Printf("\nSearching %d - %v\n",k2,bst.search(k2,bst.root))
 }
